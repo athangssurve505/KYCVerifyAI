@@ -12,9 +12,31 @@ export default function VerifyPage() {
 
   // This function will receive the recorded video
   const handleVideoRecorded = (blob) => {
-    setVideoBlob(blob);
+     setVideoBlob(blob);
+    uploadVideoBlob(blob); 
 
   };
+
+  const uploadVideoBlob = async (blob) => {
+  if (!blob) return;
+
+  const formData = new FormData();
+  formData.append("video", blob, "kyc_video.webm");
+
+  try {
+    const res = await fetch("http://localhost:8000/upload-video", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+    console.log("Uploaded:", data);
+
+  } catch (err) {
+    console.error("Upload failed:", err);
+  }
+};
+
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-8 text-center">
