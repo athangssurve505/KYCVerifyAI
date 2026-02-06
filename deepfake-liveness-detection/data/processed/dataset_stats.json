@@ -1,0 +1,24 @@
+{
+    "total_videos_processed": 10,
+    "splits": {
+        "train": 6,
+        "val": 2,
+        "test": 2
+    },
+    "target_frames": 90,
+    "feature_shape": "(90, 468, 12)",
+    "class_distribution": {
+        "train": {
+            "real": 3,
+            "fake": 4
+        },
+        "val": {
+            "real": 1,
+            "fake": 1
+        },
+        "test": {
+            "real": 1,
+            "fake": 1
+        }
+    }
+}
