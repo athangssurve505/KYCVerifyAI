@@ -1,21 +1,20 @@
 import { useState, useEffect } from 'react';
-import { Camera, Shield, Users, BarChart3, CheckCircle, AlertTriangle, User, LogOut } from 'lucide-react';
+import { Camera, Shield, Users, BarChart3, DollarSign, User, LogIn } from 'lucide-react';
 import LiveCapture from './components/LiveCapture';
 import LivenessDetection from './components/LivenessDetection';
 import FacialRecognition from './components/FacialRecognition';
 import DeduplicationDashboard from './components/DeduplicationDashboard';
 import Analytics from './components/Analytics';
 import UserManagement from './components/UserManagement';
+import Login from './components/Login';
+import Pricing from './components/Pricing';
 import './App.css';
 
 function App() {
   const [activeTab, setActiveTab] = useState('capture');
-  const [isAuthenticated, setIsAuthenticated] = useState(true); // Demo mode
-  const [currentUser, setCurrentUser] = useState({
-    name: 'Admin User',
-    role: 'Security Administrator',
-    permissions: ['all']
-  });
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
 
   const navigation = [
     { id: 'capture', label: 'Live Capture', icon: Camera, description: 'Capture facial data' },
@@ -23,8 +22,21 @@ function App() {
     { id: 'recognition', label: 'Face Recognition', icon: User, description: 'Identify & verify' },
     { id: 'deduplication', label: 'Deduplication', icon: Users, description: 'Review duplicates' },
     { id: 'analytics', label: 'Analytics', icon: BarChart3, description: 'System insights' },
-    { id: 'users', label: 'User Management', icon: Users, description: 'Manage accounts' }
+    { id: 'users', label: 'User Management', icon: Users, description: 'Manage accounts' },
+    { id: 'pricing', label: 'Pricing', icon: DollarSign, description: 'View plans' }
   ];
+
+  const handleLogin = (userData) => {
+    setIsAuthenticated(true);
+    setCurrentUser(userData);
+    setShowLogin(false);
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setCurrentUser(null);
+    setActiveTab('capture');
+  };
 
   const renderContent = () => {
     switch(activeTab) {
@@ -40,6 +52,8 @@ function App() {
         return <Analytics />;
       case 'users':
         return <UserManagement />;
+      case 'pricing':
+        return <Pricing />;
       default:
         return <LiveCapture />;
     }
@@ -51,32 +65,39 @@ function App() {
       <div className="background-grid"></div>
       <div className="scan-line"></div>
       
-      {/* Header */}
-      <header className="app-header">
+      {/* Header - Compact */}
+      <header className="app-header compact">
         <div className="header-content">
           <div className="logo-section">
             <div className="logo-icon">
               <Shield className="shield-icon" />
             </div>
             <div className="logo-text">
-              <h1>SecureID</h1>
-              <span className="tagline">Biometric Identity Verification</span>
+              <h1>KYCVerifyAI</h1>
             </div>
           </div>
           
           <div className="header-actions">
-            <div className="user-info">
-              <div className="user-avatar">
-                <User size={18} />
-              </div>
-              <div className="user-details">
-                <span className="user-name">{currentUser.name}</span>
-                <span className="user-role">{currentUser.role}</span>
-              </div>
-            </div>
-            <button className="logout-btn">
-              <LogOut size={18} />
-            </button>
+            {!isAuthenticated ? (
+              <>
+                <button className="auth-btn" onClick={() => setShowLogin(true)}>
+                  <LogIn size={16} />
+                  Login / Sign Up
+                </button>
+              </>
+            ) : (
+              <>
+                <div className="user-info-compact">
+                  <div className="user-avatar-compact">
+                    <User size={14} />
+                  </div>
+                  <span className="user-name-compact">{currentUser?.name || 'User'}</span>
+                </div>
+                <button className="logout-btn-compact" onClick={handleLogout}>
+                  Logout
+                </button>
+              </>
+            )}
           </div>
         </div>
       </header>
@@ -97,7 +118,6 @@ function App() {
                   <Icon className="nav-icon" />
                   <div className="nav-text">
                     <span className="nav-label">{item.label}</span>
-                    <span className="nav-description">{item.description}</span>
                   </div>
                   {activeTab === item.id && <div className="active-indicator"></div>}
                 </button>
@@ -118,6 +138,14 @@ function App() {
           {renderContent()}
         </main>
       </div>
+
+      {/* Login Modal */}
+      {showLogin && (
+        <Login 
+          onClose={() => setShowLogin(false)} 
+          onLogin={handleLogin}
+        />
+      )}
     </div>
   );
 }
