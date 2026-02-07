@@ -1,0 +1,337 @@
+.facial-recognition {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.recognition-controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.mode-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background: var(--glass-bg);
+  border: 2px solid var(--glass-border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-align: left;
+  color: var(--text-secondary);
+}
+
+.mode-btn:hover {
+  border-color: var(--border-color);
+  background: rgba(0, 217, 255, 0.05);
+}
+
+.mode-btn.active {
+  border-color: var(--accent-cyan);
+  background: rgba(0, 217, 255, 0.1);
+  color: var(--accent-cyan);
+}
+
+.mode-label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.mode-desc {
+  display: block;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.recognition-container {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: var(--spacing-xl);
+  align-items: start;
+}
+
+.upload-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.upload-card {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-area {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  cursor: pointer;
+  width: 100%;
+}
+
+.upload-icon {
+  color: var(--accent-cyan);
+  margin-bottom: var(--spacing-lg);
+}
+
+.upload-area h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+}
+
+.upload-area p {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+}
+
+.upload-formats {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.image-preview {
+  position: relative;
+  width: 100%;
+  padding: var(--spacing-lg);
+}
+
+.image-preview img {
+  width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+  border-radius: 8px;
+  border: 2px solid var(--accent-cyan);
+}
+
+.remove-btn {
+  position: absolute;
+  top: var(--spacing-xl);
+  right: var(--spacing-xl);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: var(--accent-red);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.remove-btn:hover {
+  transform: scale(1.05);
+}
+
+.processing-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-xl);
+  background: var(--glass-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  color: var(--accent-cyan);
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(0, 217, 255, 0.2);
+  border-top-color: var(--accent-cyan);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.result-card {
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.result-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg);
+  border-radius: 8px;
+  margin-bottom: var(--spacing-lg);
+}
+
+.result-header.success {
+  background: rgba(0, 255, 136, 0.1);
+  border: 1px solid var(--accent-green);
+  color: var(--accent-green);
+}
+
+.result-header.failed {
+  background: rgba(255, 51, 102, 0.1);
+  border: 1px solid var(--accent-red);
+  color: var(--accent-red);
+}
+
+.result-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.result-header p {
+  font-size: 0.875rem;
+  opacity: 0.8;
+}
+
+.user-details {
+  padding: var(--spacing-lg);
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-row .label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.detail-row .value {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.matches-list h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+}
+
+.match-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  margin-bottom: var(--spacing-sm);
+}
+
+.match-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.match-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.match-id {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.match-similarity {
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--accent-cyan);
+}
+
+.stats-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+}
+
+.stat {
+  text-align: center;
+  padding: var(--spacing-lg);
+  background: rgba(0, 217, 255, 0.05);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+}
+
+.stat .stat-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--accent-cyan);
+  margin-bottom: 4px;
+}
+
+.stat .stat-label {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.practices-list {
+  list-style: none;
+  padding: 0;
+}
+
+.practices-list li {
+  padding: var(--spacing-sm) 0;
+  padding-left: var(--spacing-lg);
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  position: relative;
+}
+
+.practices-list li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--accent-green);
+  font-weight: bold;
+}
+
+@media (max-width: 1200px) {
+  .recognition-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .recognition-controls {
+    grid-template-columns: 1fr;
+  }
+}
